@@ -52,7 +52,7 @@ const offices = [
   {
     city: "Yogyakarta (Head Office)",
     address:
-      "Jl. Pandansaren, RT.01/RW.11, Jurugan, Bangun Kerto, Kec. Turi, Kab. Sleman, DIY 55551",
+      "Jl. Pandansaren, RT.01/RW.11, Kendal, Bangun Kerto, Kec. Turi, Kab. Sleman, DIY 55551",
     type: "Headquarters",
     image: "bg-brand-900",
     phone: "+62 27 4210 3099",

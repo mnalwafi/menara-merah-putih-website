@@ -17,7 +17,6 @@ import {
   Mountain,
   CheckCircle2,
   Beaker,
-  LucideIcon,
 } from "lucide-react";
 import { Metadata } from "next";
 
@@ -162,10 +161,10 @@ export default function ServicesPage() {
             <Link href={"/contact"}>
               <Button
                 variant="outline"
-                className="h-12 px-6 border-slate-300 text-slate-700 hover:border-brand-600 hover:text-brand-600 cursor-pointer"
+                className="h-12 px-6 border-slate-300 text-slate-700 hover:border-brand-600 hover:text-brand-600 cursor-pointer justify-center w-full md:w-fit flex"
               >
                 <Download className="mr-2 h-4 w-4" /> Download Full Material
-                Safety Data Sheets (MSDS)
+                Safety Data Sheets
               </Button>
             </Link>
           </FadeIn>

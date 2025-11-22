@@ -84,7 +84,7 @@ export default function Footer() {
                 <span className="text-brand-200 text-sm leading-relaxed">
                   Jl. Pandansaren, RT.01/RW.11
                   <br />
-                  Jurugan, Bangun Kerto, Turi
+                  Kendal, Bangun Kerto, Turi
                   <br />
                   Sleman, DIY 55551
                 </span>

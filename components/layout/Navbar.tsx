@@ -39,7 +39,7 @@ export default function Navbar() {
   const isNeda = pathname === "/neda";
   const isProjects = pathname === "/projects";
   const isContact = pathname === "/contact";
-    const isServices = pathname === "/services";
+  const isServices = pathname === "/services";
   const isFleet = pathname === "/fleet";
 
   /**
@@ -49,7 +49,8 @@ export default function Navbar() {
    * and only on specific pages (Home, NEDA) or pages that are not explicitly light-themed.
    */
   const isTransparentNav =
-    !isScrolled && (isHome || isNeda || !(isProjects || isContact || isServices));
+    !isScrolled &&
+    (isHome || isNeda || !(isProjects || isContact || isServices));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -91,7 +92,7 @@ export default function Navbar() {
               : "w-full py-6 px-6 md:px-12 bg-transparent border-transparent"
           )}
         >
-          <Link href="/" className="flex items-center gap-3 z-50 group">
+          <Link href="/" className="flex items-center gap-3 z-50 group" onClick={() => setIsMobileOpen(false)}>
             <div className="relative h-10 w-8 group-hover:scale-105 transition-transform duration-300">
               <Image
                 src="/logo.svg"
@@ -99,7 +100,7 @@ export default function Navbar() {
                 fill
                 className={cn(
                   "object-contain transition-all duration-300",
-                  isTransparentNav && "brightness-0 invert"
+                  (isTransparentNav && !isMobileOpen) && "brightness-0 invert"
                 )}
                 priority
               />
@@ -107,12 +108,12 @@ export default function Navbar() {
             <span
               className={cn(
                 "font-black text-xl tracking-tight transition-colors duration-300",
-                isTransparentNav ? "text-white" : "text-brand-600"
+                (isTransparentNav && !isMobileOpen) ? "text-white" : "text-brand-600"
               )}
             >
               Menara Merah Putih
               <span
-                className={isTransparentNav ? "text-white" : "text-brand-600"}
+                className={(isTransparentNav && !isMobileOpen) ? "text-white" : "text-brand-600"}
               >
                 .
               </span>
@@ -176,7 +177,9 @@ export default function Navbar() {
               <Menu
                 className={cn(
                   "h-6 w-6 transition-colors",
-                  isHome || isNeda ? "text-white" : "text-slate-900"
+                  !isScrolled && (isHome || isNeda)
+                    ? "text-white"
+                    : "text-slate-900"
                 )}
               />
             )}
