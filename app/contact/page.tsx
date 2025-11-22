@@ -1,7 +1,26 @@
 import { FadeIn } from "@/components/animations/FadeIn";
 import { ContactForm } from "@/components/sections/ContactForm";
-import { Mail, MapPin, Phone, Clock, MessageSquare } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Contact Us",
+  description:
+    "Get in touch with Menara Merah Putih engineering team for NEDA consultations, site assessments, and chemical supply inquiries in Indonesia.",
+  openGraph: {
+    title: "Contact Menara Merah Putih Mining Services",
+    description:
+      "Headquartered in Yogyakarta. Reach our dispatch and engineering teams directly.",
+  },
+};
+
+/**
+ * Renders a custom SVG icon for WhatsApp to match the design system.
+ *
+ * @param {Object} props - Component props.
+ * @param {string} [props.className] - Optional CSS classes.
+ * @returns {JSX.Element} The SVG icon.
+ */
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -25,22 +44,35 @@ function WhatsAppIcon({ className }: { className?: string }) {
   );
 }
 
-// Placeholder office data (Standard Indonesian Mining Hubs)
+/**
+ * Static data representing office locations.
+ * @type {Array<{city: string, address: string, type: string, image: string, phone: string}>}
+ */
 const offices = [
   {
     city: "Yogyakarta (Head Office)",
     address:
       "Jl. Pandansaren, RT.01/RW.11, Jurugan, Bangun Kerto, Kec. Turi, Kab. Sleman, DIY 55551",
     type: "Headquarters",
-    image: "bg-brand-900", // Using Brand Red/Dark for HQ
+    image: "bg-brand-900",
     phone: "+62 27 4210 3099",
   },
 ];
 
+/**
+ * The Contact Us Page Component.
+ *
+ * Layout Structure:
+ * - **Hero Section**: Title and brief introduction.
+ * - **Main Content**: A two-column layout (responsive).
+ * - **Left Column**: Direct contact information (Email, Phone, WhatsApp) and list of office locations.
+ * - **Right Column**: The `ContactForm` component for user inquiries.
+ *
+ * @returns {JSX.Element} The rendered contact page.
+ */
 export default function ContactPage() {
   return (
     <div className="bg-white min-h-screen pt-24 pb-20">
-      {/* 1. HERO SECTION */}
       <section className="container py-12 md:py-20">
         <div className="max-w-4xl">
           <FadeIn>
@@ -64,16 +96,12 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* 2. MAIN CONTENT */}
       <section className="container pb-24">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-24">
-          {/* LEFT COLUMN: INFO & OFFICES */}
           <div className="lg:col-span-5 space-y-12 order-2 lg:order-1">
-            {/* Direct Contacts */}
             <FadeIn delay={0.3} className="space-y-6">
               <h3 className="text-xl font-bold text-slate-900">Direct Lines</h3>
               <div className="space-y-4">
-                {/* Email */}
                 <div className="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100">
                   <div className="p-2 bg-white rounded-lg border border-slate-200 shadow-sm">
                     <Mail className="h-5 w-5 text-brand-600" />
@@ -88,7 +116,6 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                {/* Phone */}
                 <div className="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100">
                   <div className="p-2 bg-white rounded-lg border border-slate-200 shadow-sm">
                     <Phone className="h-5 w-5 text-brand-600" />
@@ -101,7 +128,6 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                {/* WhatsApp */}
                 <div className="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100">
                   <div className="p-2 bg-white rounded-lg border border-slate-200 shadow-sm">
                     <WhatsAppIcon className="h-5 w-5 text-emerald-600" />
@@ -118,7 +144,6 @@ export default function ContactPage() {
               </div>
             </FadeIn>
 
-            {/* Office Locations */}
             <FadeIn delay={0.4} className="space-y-6">
               <h3 className="text-xl font-bold text-slate-900">Our Presence</h3>
               <div className="grid gap-6">
@@ -128,14 +153,12 @@ export default function ContactPage() {
                     className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white hover:shadow-lg transition-all duration-300 hover:border-brand-200"
                   >
                     <div className="flex h-auto min-h-[140px]">
-                      {/* Image Placeholder Section */}
                       <div
                         className={`w-24 shrink-0 ${office.image} flex items-center justify-center`}
                       >
                         <MapPin className="text-white/50 h-8 w-8 group-hover:scale-110 transition-transform duration-500" />
                       </div>
 
-                      {/* Text Section */}
                       <div className="p-5 flex flex-col justify-center">
                         <span className="text-[10px] font-bold text-brand-600 uppercase tracking-wide mb-2 bg-brand-50 w-fit px-2 py-0.5 rounded-full">
                           {office.type}
@@ -154,7 +177,6 @@ export default function ContactPage() {
             </FadeIn>
           </div>
 
-          {/* RIGHT COLUMN: THE FORM */}
           <div className="lg:col-span-7 order-1 lg:order-2">
             <div className="sticky top-32">
               <FadeIn delay={0.2}>

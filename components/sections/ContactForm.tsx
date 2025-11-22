@@ -1,18 +1,19 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
+import { Loader2, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  CheckCircle2,
-  Loader2,
-  Send,
-  AlertCircle,
-  MessageSquare,
-} from "lucide-react"; // Added MessageSquare
-import { motion } from "framer-motion";
 
+/**
+ * Renders a custom SVG icon for WhatsApp.
+ *
+ * @param {Object} props - The component props.
+ * @param {string} [props.className] - Optional CSS class names for styling the SVG.
+ * @returns {JSX.Element} The SVG icon component.
+ */
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -36,13 +37,24 @@ function WhatsAppIcon({ className }: { className?: string }) {
   );
 }
 
+/**
+ * A contact form component that captures user inquiry details and redirects
+ * them to WhatsApp with a pre-formatted message.
+ *
+ * Features:
+ * - Captures Name, Email, Company, Phone, and Project Details.
+ * - Allows selection between multiple service types (NEDA, Chemicals, General).
+ * - Handles form submission state (loading vs. idle).
+ * - Redirects to the specific WhatsApp API URL upon successful submission.
+ * - Displays a success message/instruction after the redirect triggers.
+ *
+ * @returns {JSX.Element} The rendered contact form.
+ */
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success">(
     "idle"
   );
   const [service, setService] = useState("NEDA");
-
-  // State for inputs to capture data
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -51,24 +63,32 @@ export function ContactForm() {
     details: "",
   });
 
+  /**
+   * Updates the form data state when input fields change.
+   * @param {React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>} e - The change event.
+   */
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
+  /**
+   * Handles the form submission.
+   * Simulates a network request, formats the data into a WhatsApp message string,
+   * opens the WhatsApp API in a new tab, and updates the UI state.
+   *
+   * @param {React.FormEvent} e - The form submission event.
+   */
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("submitting");
 
-    // 1. Simulate a brief loading state for UX
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    // 2. Format the Message
-    // %0a creates a new line in WhatsApp
-    const phoneNumber = "62882005779991"; // Your WhatsApp Number
+    const phoneNumber = "62882005779991";
     const message =
-      `*New Quotation Request - EcoBuild Website*%0a%0a` +
+      `*New Quotation Request - Menara Merah Putih Website*%0a%0a` +
       `*Service:* ${service}%0a` +
       `*Name:* ${formData.name}%0a` +
       `*Company:* ${formData.company}%0a` +
@@ -77,10 +97,8 @@ export function ContactForm() {
       `---------------------------%0a` +
       `*Details:*%0a${formData.details}`;
 
-    // 3. Open WhatsApp
-    const waURL = `https://wa.me/${phoneNumber}?text=${message}`; // No encodeURIComponent needed if simple, but safer to wrap message in it if complex
+    const waURL = `https://wa.me/${phoneNumber}?text=${message}`;
 
-    // Better way to open:
     window.open(waURL, "_blank");
 
     setStatus("success");
@@ -119,7 +137,6 @@ export function ContactForm() {
       onSubmit={handleSubmit}
       className="bg-white rounded-3xl p-8 border border-slate-200 shadow-2xl shadow-slate-200/50 relative overflow-hidden"
     >
-      {/* Brand Stripe */}
       <div className="absolute top-0 left-0 w-full h-2 bg-brand-600" />
 
       <div className="mb-8">
@@ -133,7 +150,6 @@ export function ContactForm() {
       </div>
 
       <div className="space-y-5">
-        {/* Service Selection Tabs */}
         <div className="grid grid-cols-3 gap-2 p-1 bg-slate-100 rounded-lg mb-6">
           {["NEDA", "Chemicals", "General"].map((s) => (
             <button
@@ -151,7 +167,6 @@ export function ContactForm() {
           ))}
         </div>
 
-        {/* B2B Inputs */}
         <div className="grid md:grid-cols-2 gap-4">
           <div className="space-y-2">
             <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
@@ -223,7 +238,6 @@ export function ContactForm() {
           />
         </div>
 
-        {/* Submit Button */}
         <Button
           type="submit"
           disabled={status === "submitting"}
@@ -238,7 +252,6 @@ export function ContactForm() {
           )}
         </Button>
 
-        {/* Trust Signal */}
         <div className="flex items-center justify-center gap-2 text-xs text-slate-400 mt-4">
           <AlertCircle className="h-3 w-3" />
           <span>Fastest response via WhatsApp (Avg 10 mins).</span>

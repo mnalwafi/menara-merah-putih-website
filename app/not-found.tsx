@@ -1,4 +1,4 @@
-"use client"; // We need client side for the interaction
+"use client";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -13,18 +13,32 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 
+/**
+ * A custom 404 Not Found page component.
+ *
+ * Features:
+ * - Displays a standard "Page Not Found" message with mining-themed copy.
+ * - Provides a primary call-to-action to return to the homepage.
+ * - Includes an interactive "Rock Breaker" mini-game to demonstrate the NEDA technology concept.
+ * - Uses Framer Motion for state transitions and visual effects.
+ *
+ * @returns {JSX.Element} The rendered 404 page.
+ */
 export default function NotFound() {
   const [rockState, setRockState] = useState<"intact" | "injecting" | "broken">(
     "intact"
   );
 
+  /**
+   * Handles the interaction logic for the rock breaking simulation.
+   * 1. Sets state to 'injecting' to show the progress bar.
+   * 2. Sets a timeout to transition to 'broken' state after 2 seconds.
+   */
   const handleBreakRock = () => {
     if (rockState !== "intact") return;
 
-    // 1. Start Injection (Simulate the process)
     setRockState("injecting");
 
-    // 2. Wait 2 seconds (Simulating the 24h expansion period, but fast)
     setTimeout(() => {
       setRockState("broken");
     }, 2000);
@@ -32,13 +46,11 @@ export default function NotFound() {
 
   return (
     <div className="h-screen w-full bg-slate-950 flex items-center justify-center relative overflow-hidden text-white">
-      {/* Abstract Background Effects */}
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-5" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-brand-600/10 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="container relative z-10 text-center">
         <FadeIn>
-          {/* 404 Visuals */}
           <div className="mx-auto h-24 w-24 bg-slate-900 rounded-3xl border border-slate-800 flex items-center justify-center mb-8 relative group">
             <div className="absolute inset-0 bg-brand-600/20 blur-xl group-hover:bg-brand-600/30 transition-all duration-500" />
             <Construction className="h-10 w-10 text-brand-500 relative z-10" />
@@ -55,7 +67,6 @@ export default function NotFound() {
             our latest site excavation.
           </p>
 
-          {/* PRIMARY CTA */}
           <div className="flex justify-center gap-4 mb-16">
             <Link href="/">
               <Button
@@ -67,7 +78,6 @@ export default function NotFound() {
             </Link>
           </div>
 
-          {/* --- THE FUN PART: ROCK BREAKER MINI-GAME --- */}
           <div className="border-t border-slate-800 pt-10 max-w-sm mx-auto">
             <p className="text-slate-500 text-sm font-mono mb-6 uppercase tracking-widest">
               Or clear the path yourself
@@ -90,7 +100,6 @@ export default function NotFound() {
                     }
                 `}
             >
-              {/* STATE 1: INTACT ROCK */}
               {rockState === "intact" && (
                 <motion.div
                   initial={{ scale: 0.9 }}
@@ -109,7 +118,6 @@ export default function NotFound() {
                 </motion.div>
               )}
 
-              {/* STATE 2: EXPANDING (ANIMATION) */}
               {rockState === "injecting" && (
                 <div className="w-full px-8 text-center">
                   <div className="mb-2 flex justify-between text-xs font-bold text-emerald-500 uppercase">
@@ -124,7 +132,6 @@ export default function NotFound() {
                       className="h-full bg-emerald-500"
                     />
                   </div>
-                  {/* Shaking Effect */}
                   <motion.p
                     animate={{ x: [-1, 1, -1, 1, 0] }}
                     transition={{ repeat: Infinity, duration: 0.2 }}
@@ -135,7 +142,6 @@ export default function NotFound() {
                 </div>
               )}
 
-              {/* STATE 3: BROKEN */}
               {rockState === "broken" && (
                 <motion.div
                   initial={{ scale: 0.8, opacity: 0 }}
@@ -155,7 +161,6 @@ export default function NotFound() {
                 </motion.div>
               )}
 
-              {/* VISUAL CRACKS (Only appear when broken) */}
               {rockState === "broken" && (
                 <>
                   <div className="absolute top-0 left-1/4 w-0.5 h-full bg-slate-950/50 -rotate-12" />
@@ -167,10 +172,10 @@ export default function NotFound() {
         </FadeIn>
       </div>
 
-      {/* Footer decoration */}
       <div className="absolute bottom-8 left-0 w-full text-center">
         <p className="text-slate-600 text-xs font-mono flex items-center justify-center gap-2">
-          <HardHat className="h-3 w-3" /> EcoBuild Mining Services System
+          <HardHat className="h-3 w-3" /> Menara Merah Putih Mining Services
+          System
         </p>
       </div>
     </div>

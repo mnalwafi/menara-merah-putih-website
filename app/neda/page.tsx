@@ -7,37 +7,59 @@ import {
   PaintBucket,
   Scaling,
   Thermometer,
-  Timer,
   ArrowDown,
   FileText,
+  LucideIcon,
 } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "NEDA Technology (Non-Explosive Demolition Agent)",
+  title: "NEDA Technology - Silent Rock Breaking Agent",
   description:
-    "Technical specifications for NEDA rock breaking. Silent, vibration-free demolition for sensitive mining zones. 18,000 PSI expansive pressure.",
+    "Technical specifications and application guide for NEDA (Non-Explosive Demolition Agent). Safe, vibration-free rock breaking with 18,000 PSI expansive pressure.",
   keywords: [
-    "Chemical Rock Breaking",
-    "Silent Demolition",
-    "NEDA vs Explosives",
-    "Concrete Demolition Agent",
+    "NEDA",
+    "Non-Explosive Demolition Agent",
+    "Silent Rock Breaking",
+    "Chemical Rock Demolition",
+    "Concrete Demolition Powder",
+    "Expansive Mortar",
+    "Mining Safety",
+    "No Vibration Demolition",
   ],
+  openGraph: {
+    title: "NEDA - Silent & Safe Rock Breaking Technology",
+    description:
+      "Break rock without explosives. NEDA generates 18,000 PSI of expansive force for silent, vibration-free demolition.",
+    type: "website",
+    images: ["/hero-image-4.webp"],
+  },
 };
 
-// --- DATA: THE 4-STEP PROCESS ---
+/**
+ * Defines the structure for a step in the application process.
+ * @typedef {Object} ProcessStep
+ * @property {string} step - The step number (formatted as '01', '02', etc.).
+ * @property {string} title - The name of the process stage.
+ * @property {string} desc - Instructions for the stage. Diagram tags included for technical visualization.
+ * @property {LucideIcon} icon - The icon representing the action.
+ */
+
+/**
+ * The 4-step application guide for NEDA.
+ * @type {ProcessStep[]}
+ */
 const processSteps = [
   {
     step: "01",
     title: "Drill Pattern",
-    desc: "Drill holes of 38mm-50mm diameter. Spacing is calculated based on rock hardness and free face availability.",
+    desc: "Drill holes of 38mm-50mm diameter. Spacing is calculated based on rock hardness and free face availability. ",
     icon: Drill,
   },
   {
     step: "02",
     title: "Mix Agent",
-    // CHANGED: Removed water ratio. Emphasized "smooth consistency".
     desc: "Mix the NEDA powder with clean water until a smooth, lump-free slurry is achieved. Follow the specific mixing guide provided.",
     icon: FlaskConical,
   },
@@ -50,12 +72,15 @@ const processSteps = [
   {
     step: "04",
     title: "Expansion",
-    desc: "The agent expands with 18,000 PSI force. Cracks initiate within 4-24 hours depending on ambient temperature.",
+    desc: "The agent expands with 18,000 PSI force. Cracks initiate within 4-24 hours depending on ambient temperature. ",
     icon: Scaling,
   },
 ];
 
-// --- DATA: TECHNICAL SPECS ---
+/**
+ * Technical specifications data for the product.
+ * @type {Array<{label: string, value: string}>}
+ */
 const specs = [
   { label: "Expansive Pressure", value: "> 120 MPa (18,000 PSI)" },
   { label: "Hole Diameter", value: "38mm - 50mm" },
@@ -65,18 +90,32 @@ const specs = [
   { label: "pH Value", value: "12.5 (Alkaline)" },
 ];
 
+/**
+ * Available temperature grades to suit different environmental conditions.
+ * @type {Array<{type: string, temp: string, note: string}>}
+ */
 const tempGrades = [
   { type: "SCA-1", temp: "25°C - 40°C", note: "Tropical / Summer Grade" },
   { type: "SCA-2", temp: "10°C - 25°C", note: "Standard Grade" },
   { type: "SCA-3", temp: "-5°C - 10°C", note: "High Altitude / Winter" },
 ];
 
+/**
+ * NEDA Product Page Component.
+ *
+ * Features:
+ * - **Hero Section**: Introduction to the technology with download CTAs.
+ * - **Process Guide**: A visual 4-step guide on how to use the agent.
+ * - **Technical Specs**: Detailed data table and temperature grade selection.
+ * - **Comparison**: Comparison section (imported) contrasting NEDA with traditional blasting.
+ * - **Calculator CTA**: Prompts user to contact engineering for precise usage estimates.
+ *
+ * @returns {JSX.Element} The rendered NEDA product page.
+ */
 export default function NedaPage() {
   return (
     <div className="bg-white min-h-screen pb-20">
-      {/* 1. HERO SECTION (Green Theme) */}
       <section className="relative overflow-hidden h-[880px] bg-emerald-950 py-20 md:py-32 text-white">
-        {/* Abstract Background */}
         <div className="absolute top-0 right-0 w-2/3 h-full bg-emerald-900/20 skew-x-12 pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-emerald-500/10 blur-[120px] rounded-full pointer-events-none" />
 
@@ -104,7 +143,7 @@ export default function NedaPage() {
                 <Link href={"/contact"}>
                   <Button
                     size="lg"
-                    className="bg-emerald-500 hover:bg-emerald-600 text-white border-0 cursor-pointer"
+                    className="bg-emerald-500 hover:bg-emerald-600 text-white border-0 cursor-pointer h-12"
                   >
                     Download TDS (PDF) <ArrowDown className="ml-2 h-4 w-4" />
                   </Button>
@@ -113,7 +152,7 @@ export default function NedaPage() {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-emerald-500/30 bg-transparent text-emerald-100 hover:bg-emerald-500/10 hover:text-white cursor-pointer"
+                    className="border-emerald-500/30 bg-transparent text-emerald-100 hover:bg-emerald-500/10 hover:text-white cursor-pointer h-12"
                   >
                     Calculate Usage
                   </Button>
@@ -124,7 +163,6 @@ export default function NedaPage() {
         </div>
       </section>
 
-      {/* 2. HOW IT WORKS (Process) */}
       <section className="container py-24">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
           <FadeIn className="max-w-xl">
@@ -139,7 +177,6 @@ export default function NedaPage() {
         </div>
 
         <div className="grid md:grid-cols-4 gap-8 relative">
-          {/* Connecting Line (Desktop only) */}
           <div className="hidden md:block absolute top-8 left-0 w-full h-0.5 bg-emerald-100 z-0" />
 
           {processSteps.map((step, i) => (
@@ -161,11 +198,9 @@ export default function NedaPage() {
         </div>
       </section>
 
-      {/* 3. TECHNICAL SPECS (Grid) */}
       <section className="bg-slate-50 py-24 border-y border-slate-200">
         <div className="container">
           <div className="grid lg:grid-cols-2 gap-16">
-            {/* Left: The Numbers */}
             <FadeIn>
               <h2 className="text-3xl font-bold text-slate-900 mb-8">
                 Technical Specifications
@@ -186,7 +221,6 @@ export default function NedaPage() {
                 ))}
               </div>
 
-              {/* Safety Warning */}
               <div className="mt-8 p-6 bg-amber-50 rounded-2xl border border-amber-100 flex gap-4">
                 <div className="p-2 bg-amber-100 rounded-lg h-fit text-amber-700">
                   <Thermometer className="h-6 w-6" />
@@ -204,7 +238,6 @@ export default function NedaPage() {
               </div>
             </FadeIn>
 
-            {/* Right: Temperature Grades */}
             <FadeIn delay={0.2}>
               <h2 className="text-3xl font-bold text-slate-900 mb-8">
                 Product Grades
@@ -242,7 +275,6 @@ export default function NedaPage() {
         </div>
       </section>
 
-      {/* 4. REUSED COMPARISON COMPONENT */}
       <section className="bg-slate-900 py-24">
         <div className="container">
           <div className="text-center max-w-2xl mx-auto mb-16">
@@ -263,7 +295,6 @@ export default function NedaPage() {
         </div>
       </section>
 
-      {/* 5. CTA */}
       <section className="container py-24 text-center">
         <FadeIn>
           <h2 className="text-3xl font-bold text-slate-900 mb-6">

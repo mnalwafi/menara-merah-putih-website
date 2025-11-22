@@ -1,38 +1,51 @@
 import Link from "next/link";
-import {
-  Facebook,
-  Linkedin,
-  Instagram,
-  MapPin,
-  Mail,
-  Phone,
-} from "lucide-react";
+import Image from "next/image";
+import { Linkedin, MapPin, Mail, Phone } from "lucide-react";
 
+/**
+ * Renders the site-wide footer component.
+ *
+ * Features:
+ * - Displays the brand logo (filtered to white via CSS) and mission statement.
+ * - Provides quick navigation links to solution categories.
+ * - Lists specific contact details including physical address, email, and phone.
+ * - Auto-generates the current year for the copyright notice.
+ * - Responsive grid layout (stacks on mobile, columns on desktop).
+ *
+ * @returns {JSX.Element} The rendered footer section.
+ */
 export default function Footer() {
   return (
     <footer className="bg-brand-950 text-white pt-24 pb-12">
       <div className="container">
         <div className="grid md:grid-cols-4 gap-12 mb-16 border-b border-brand-900 pb-12">
-          {/* BRAND COLUMN */}
           <div className="col-span-1 md:col-span-2 pr-8">
-            <div className="flex items-center gap-2 mb-6">
-              <div className="h-8 w-8 bg-white rounded-br-lg rounded-tl-lg flex items-center justify-center">
-                <span className="text-brand-900 font-bold text-lg">E</span>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="relative h-10 w-8">
+                <Image
+                  src="/logo.svg"
+                  alt="Menara Merah Putih Logo"
+                  fill
+                  className="object-contain brightness-0 invert"
+                />
               </div>
-              <span className="font-bold text-2xl tracking-tight">
-                EcoBuild<span className="text-brand-500">.</span>
+
+              <span className="font-black text-2xl tracking-tight">
+                Menara Merah Putih.
               </span>
             </div>
+
             <p className="text-brand-200 mb-8 max-w-md leading-relaxed">
               Indonesia's leading mining infrastructure partner. Specialized in
               NEDA (Non-Explosive Demolition), Dust Control, and Soil
               Stabilization.
             </p>
+
             <div className="flex gap-4">
-              {[Linkedin, Instagram, Facebook].map((Icon, i) => (
+              {[Linkedin].map((Icon, i) => (
                 <Link
                   key={i}
-                  href="#"
+                  href="https://www.linkedin.com/company/menaramerahputih"
                   className="h-10 w-10 rounded-full bg-brand-900 flex items-center justify-center hover:bg-brand-800 transition-colors"
                 >
                   <Icon className="h-5 w-5 text-white" />
@@ -41,7 +54,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* LINKS COLUMN */}
           <div>
             <h4 className="font-bold text-lg mb-6 text-white">Solutions</h4>
             <ul className="space-y-4">
@@ -64,7 +76,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* CONTACT COLUMN (REAL DATA) */}
           <div>
             <h4 className="font-bold text-lg mb-6 text-white">Head Office</h4>
             <ul className="space-y-6">
@@ -92,9 +103,11 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* BOTTOM BAR */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-brand-300">
-          <p>&copy; 2025 EcoBuild Mining Services. All rights reserved.</p>
+          <p>
+            &copy; {new Date().getFullYear()} Menara Merah Putih Mining
+            Services. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

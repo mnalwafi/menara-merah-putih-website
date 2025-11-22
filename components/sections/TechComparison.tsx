@@ -12,6 +12,22 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+/**
+ * Represents a single comparison metric data point.
+ *
+ * @typedef {Object} MetricItem
+ * @property {string} label - The title of the comparison category.
+ * @property {string} traditional - The value/result for the traditional method.
+ * @property {string} neda - The value/result for the NEDA method.
+ * @property {LucideIcon} icon - The Lucide React icon component associated with the metric.
+ */
+
+/**
+ * A static configuration array defining the comparison points between
+ * Traditional Blasting and NEDA (Non-Explosive Demolition Agent) technology.
+ *
+ * @type {MetricItem[]}
+ */
 const metrics = [
   {
     label: "Safety Radius",
@@ -39,12 +55,23 @@ const metrics = [
   },
 ];
 
+/**
+ * Renders a side-by-side comparison interface highlighting the differences
+ * between Traditional Blasting and NEDA Technology.
+ *
+ * Features:
+ * - Responsive layout (stacks on mobile, side-by-side on desktop).
+ * - Interactive row highlighting using local state.
+ * - Framer Motion animations for entry effects.
+ * - Visual styling using Tailwind CSS to distinguish between "danger" (Traditional) and "safe" (NEDA) states.
+ *
+ * @returns {JSX.Element} The rendered comparison component.
+ */
 export function TechComparison() {
   const [hoveredRow, setHoveredRow] = useState<number | null>(null);
 
   return (
     <div className="w-full bg-slate-900 rounded-3xl border border-slate-800 overflow-hidden flex flex-col md:flex-row">
-      {/* LEFT COLUMN: TRADITIONAL */}
       <div className="flex-1 p-8 border-b md:border-b-0 md:border-r border-slate-800 bg-slate-900/50">
         <div className="flex items-center gap-3 mb-8 opacity-70">
           <div className="p-2 bg-red-500/10 rounded-lg">
@@ -80,7 +107,6 @@ export function TechComparison() {
         </div>
       </div>
 
-      {/* RIGHT COLUMN: NEDA (Formerly EcoBust) */}
       <div className="flex-1 p-8 bg-gradient-to-b from-emerald-950/30 to-transparent relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 blur-[100px] rounded-full pointer-events-none" />
 

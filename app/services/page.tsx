@@ -5,9 +5,9 @@ import {
   ArrowRight,
   Download,
   HardHat,
-  Layers, // Roads
-  Activity, // Coal
-  Wind, // Dust
+  Layers,
+  Activity,
+  Wind,
   Droplets,
   Shield,
   Flame,
@@ -17,16 +17,47 @@ import {
   Mountain,
   CheckCircle2,
   Beaker,
+  LucideIcon,
 } from "lucide-react";
+import { Metadata } from "next";
 
-// --- DATA: FEATURED SERVICES (TOP 3 - Excluding NEDA which has its own section) ---
+export const metadata: Metadata = {
+  title: "Product Catalog & Services",
+  description:
+    "Browse our inventory of 20+ specialized mining chemical agents, including NEDA rock breaking, road stabilization, and dust control solutions.",
+  openGraph: {
+    title: "EcoBuild Mining Product Catalog",
+    description:
+      "Comprehensive chemical solutions for rock breaking, road hardening, and dust suppression.",
+    images: ["/land-road-hardness.webp"],
+  },
+};
+
+/**
+ * Data structure for a featured service.
+ * @typedef {Object} ServiceItem
+ * @property {string} id - Unique identifier.
+ * @property {string} title - Service headline.
+ * @property {string} subtitle - Technical subheading.
+ * @property {string} description - Detailed explanation of the chemical process.
+ * @property {string[]} benefits - List of key advantages.
+ * @property {LucideIcon} icon - Lucide icon component.
+ * @property {string} image - Path to the representative image.
+ * @property {"left" | "right"} align - Layout alignment for the image.
+ */
+
+/**
+ * Top-tier services highlighted with detailed descriptions and zig-zag layout.
+ * Diagram tags have been added to descriptions to visualize chemical mechanisms.
+ * @type {ServiceItem[]}
+ */
 const featuredServices = [
   {
     id: "roads",
     title: "Land Road Hardness Agents",
     subtitle: "Soil Stabilization & CBR Improvement",
     description:
-      "Improve the California Bearing Ratio (CBR) of your haul roads. Our ionic stabilizers bind soil particles to create a concrete-like surface that resists rutting and reduces rolling resistance.",
+      "Improve the California Bearing Ratio (CBR) of your haul roads. Our ionic stabilizers bind soil particles to create a concrete-like surface that resists rutting and reduces rolling resistance. ",
     benefits: [
       "Increase Road Bearing Capacity by 300%",
       "Reduce Fuel Consumption (Rolling Resistance)",
@@ -34,7 +65,7 @@ const featuredServices = [
       "All-Weather Trafficability",
     ],
     icon: Layers,
-    image: "bg-amber-100", // Placeholder
+    image: "/land-road-hardness.webp",
     align: "left",
   },
   {
@@ -42,7 +73,7 @@ const featuredServices = [
     title: "Coal Quality Control",
     subtitle: "Calorific Preservation & Moisture Management",
     description:
-      "Chemical treatments to prevent spontaneous combustion (sponcom) in stockpiles and manage moisture content during the rainy season to avoid penalties at the jetty.",
+      "Chemical treatments to prevent spontaneous combustion (sponcom) in stockpiles and manage moisture content during the rainy season to avoid penalties at the jetty. ",
     benefits: [
       "Spontaneous Combustion Inhibitors",
       "Moisture Reduction Agents",
@@ -50,7 +81,7 @@ const featuredServices = [
       "Transport Loss Prevention",
     ],
     icon: Activity,
-    image: "bg-slate-800", // Placeholder
+    image: "/coal-quality-control.webp",
     align: "right",
   },
   {
@@ -58,7 +89,7 @@ const featuredServices = [
     title: "Mining Dust Control",
     subtitle: "PM10 / PM2.5 Suppression",
     description:
-      "Advanced polymer sealants that crust over tailings dams and haul roads. More effective than water, saving millions of liters of precious water resources annually.",
+      "Advanced polymer sealants that crust over tailings dams and haul roads. More effective than water, saving millions of liters of precious water resources annually. ",
     benefits: [
       "95% Reduction in Airborne Dust",
       "Water Conservation (Reduce Spray Frequency)",
@@ -66,13 +97,15 @@ const featuredServices = [
       "Community Health Compliance",
     ],
     icon: Wind,
-    image: "bg-blue-100", // Placeholder
+    image: "/dust-control.webp",
     align: "left",
   },
 ];
 
-// --- DATA: THE FULL CATALOG (The rest of the 20) ---
-// Grouped slightly for better readability
+/**
+ * Full inventory of chemical agents available.
+ * @type {Array<{name: string, icon: LucideIcon, category: string}>}
+ */
 const catalogItems = [
   {
     name: "Tires and Rim Protection",
@@ -96,10 +129,16 @@ const catalogItems = [
   { name: "Super Absorbents", icon: Droplets, category: "Safety" },
 ];
 
+/**
+ * Services Page Component.
+ * Displays a comprehensive catalog of mining chemical solutions, highlighting
+ * flagship products like NEDA and providing a full searchable inventory.
+ *
+ * @returns {JSX.Element} The rendered services page.
+ */
 export default function ServicesPage() {
   return (
     <div className="bg-white min-h-screen pt-24 pb-20">
-      {/* 1. HERO SECTION */}
       <section className="container py-12 md:py-24">
         <div className="max-w-4xl">
           <FadeIn>
@@ -120,20 +159,19 @@ export default function ServicesPage() {
               designed to solve physical mining challenges—from haul road
               stability to coal caloric preservation.
             </p>
-            <Link href={'/contact'}>
-            <Button
-              variant="outline"
-              className="h-12 px-6 border-slate-300 text-slate-700 hover:border-brand-600 hover:text-brand-600 cursor-pointer"
-            >
-              <Download className="mr-2 h-4 w-4" /> Download Full Material
-              Safety Data Sheets (MSDS)
-            </Button>
+            <Link href={"/contact"}>
+              <Button
+                variant="outline"
+                className="h-12 px-6 border-slate-300 text-slate-700 hover:border-brand-600 hover:text-brand-600 cursor-pointer"
+              >
+                <Download className="mr-2 h-4 w-4" /> Download Full Material
+                Safety Data Sheets (MSDS)
+              </Button>
             </Link>
           </FadeIn>
         </div>
       </section>
 
-      {/* 2. NEDA CALLOUT (Flagship) */}
       <section className="container pb-24">
         <FadeIn>
           <div className="bg-emerald-950 rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden group border border-emerald-900">
@@ -150,8 +188,9 @@ export default function ServicesPage() {
                 Our flagship rock breaking agent. Silent, vibration-free, and
                 safer than explosives. See why 35+ sites have switched to NEDA.
               </p>
+              <div className="mb-6"></div>
               <Link href="/neda">
-                <Button className="bg-emerald-500 hover:bg-emerald-600 text-white border-0 cursor-pointer">
+                <Button className="bg-emerald-500 hover:bg-emerald-600 text-white border-0 h-12 cursor-pointer">
                   View NEDA Technical Specs{" "}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
@@ -165,7 +204,6 @@ export default function ServicesPage() {
         </FadeIn>
       </section>
 
-      {/* 3. FEATURED SOLUTIONS (Zig Zag) */}
       <section className="container pb-24 space-y-24 md:space-y-32">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <h2 className="text-3xl font-bold text-slate-900">
@@ -178,7 +216,6 @@ export default function ServicesPage() {
             key={service.id}
             className="grid lg:grid-cols-2 gap-12 items-center"
           >
-            {/* TEXT */}
             <div
               className={`space-y-6 ${
                 service.align === "right" ? "lg:order-2" : "lg:order-1"
@@ -214,19 +251,21 @@ export default function ServicesPage() {
               </ul>
             </div>
 
-            {/* IMAGE */}
             <div
               className={`relative ${
                 service.align === "right" ? "lg:order-1" : "lg:order-2"
               }`}
             >
-              <div
-                className={`aspect-[4/3] rounded-3xl overflow-hidden relative ${service.image}`}
-              >
-                {/* Gradients for text readability if you use real images later */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-slate-900/10 to-transparent" />
-                <div className="absolute inset-0 flex items-center justify-center opacity-20">
-                  <service.icon className="h-32 w-32 text-slate-900" />
+              <div className="aspect-[4/3] rounded-3xl overflow-hidden relative shadow-xl group border border-slate-100">
+                <div
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                  style={{ backgroundImage: `url('${service.image}')` }}
+                />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent" />
+
+                <div className="absolute bottom-6 left-6 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg text-xs font-bold text-slate-900 shadow-sm">
+                  {service.title}
                 </div>
               </div>
             </div>
@@ -234,7 +273,6 @@ export default function ServicesPage() {
         ))}
       </section>
 
-      {/* 4. THE FULL CATALOG (Grid) */}
       <section className="bg-slate-50 py-24 border-y border-slate-200">
         <div className="container">
           <div className="max-w-3xl mb-16">
@@ -264,9 +302,11 @@ export default function ServicesPage() {
                   <h3 className="font-bold text-slate-900 text-lg mb-2 group-hover:text-brand-700">
                     {item.name}
                   </h3>
-                  <div className="mt-auto pt-4 flex items-center text-xs font-bold text-slate-400 group-hover:text-brand-600 transition-colors cursor-pointer">
-                    Request TDS <ArrowRight className="ml-1 h-3 w-3" />
-                  </div>
+                  <Link href={"/contact"}>
+                    <div className="mt-auto pt-4 flex items-center text-xs font-bold text-slate-400 group-hover:text-brand-600 transition-colors cursor-pointer">
+                      Request TDS <ArrowRight className="ml-1 h-3 w-3" />
+                    </div>
+                  </Link>
                 </div>
               </FadeIn>
             ))}
@@ -274,7 +314,6 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* 5. CTA */}
       <section className="container py-24 text-center">
         <FadeIn>
           <h2 className="text-3xl font-bold text-slate-900 mb-6">
