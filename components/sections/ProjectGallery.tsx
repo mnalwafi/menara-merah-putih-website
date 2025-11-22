@@ -60,7 +60,7 @@ const projects = [
   },
   {
     id: 6,
-    client: "PT Univherv Indonesia",
+    client: "PT Unichem Indonesia",
     location: "Nusa Tenggara",
     category: "NEDA",
     image: "/pt-unichem-1.jpg",
