@@ -8,7 +8,7 @@ import Footer from "@/components/layout/Footer";
 const manrope = Manrope({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ecobuild-mining.id"),
+  metadataBase: new URL("https://menaramerahputih.com"),
   title: {
     default: "Menara Merah Putih Mining Services | NEDA & Infrastructure",
     template: "%s | Menara Merah Putih Mining",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://ecobuild-mining.id",
+    url: "https://menaramerahputih.com",
     siteName: "Menara Merah Putih Mining Services",
     images: [
       {
